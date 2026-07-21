@@ -1,11 +1,7 @@
-import whisper
-import edge_tts
-import torch
-import sounddevice
+from google import genai
+from app.ai.llm.config import GEMINI_API_KEY
 
-print("Whisper:", whisper.__version__ if hasattr(whisper, "__version__") else "OK")
-print("Torch:", torch.__version__)
-print("Edge TTS: OK")
-print("SoundDevice: OK")
+client = genai.Client(api_key=GEMINI_API_KEY)
 
-print("\nYAARA Environment Ready 🚀")
+for model in client.models.list():
+    print(model.name)
