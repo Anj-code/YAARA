@@ -1,16 +1,20 @@
+from app.ai.speech_to_text.audio_recorder import AudioRecorder
 from app.ai.speech_to_text.transcriber_factory import TranscriberFactory
-from app.ai.text_to_speech.speaker_factory import SpeakerFactory
 
 
 def main():
+    recorder = AudioRecorder()
+
+    audio_path = "sample.mpeg"
+
     transcriber = TranscriberFactory.create()
-    speaker = SpeakerFactory.create()
 
-    text = transcriber.transcribe("sample.wav")
+    text = transcriber.transcribe(audio_path)
 
-    print(text)
-
-    speaker.speak(text)
+    if not text.strip():
+        print("⚠️ No speech detected.")
+    else:
+        print(f"You said: {text}")
 
 
 if __name__ == "__main__":
