@@ -16,3 +16,6 @@ __pycache__/
 Thumbs.db
 test_install.py
 test_mic.py
+sample.mpeg
+record.mpeg
+response.mp3
