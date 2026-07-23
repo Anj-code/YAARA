@@ -9,7 +9,7 @@ class GeminiLLM(BaseLLM):
     def __init__(self):
         self.client = genai.Client(api_key=GEMINI_API_KEY)
 
-    def generate_response(self, user_input: str) -> str:
+    def generate_response(self, user_input: str, memory_context: str = "") -> str:
 
         prompt = f"""
 You are YAARA.
@@ -49,12 +49,15 @@ Rules:
 - If they just want to vent, listen instead of trying to fix everything immediately.
 - It's okay to tease or joke lightly if it helps brighten the mood.
 
+Previous conversation:
+{memory_context}
+
 The user says:
 {user_input}
 """
 
         response = self.client.models.generate_content(
-            model="models/gemini-3.6-flash",
+            model="models/gemini-flash-latest",
             contents=prompt,
         )
 
